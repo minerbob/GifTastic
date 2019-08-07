@@ -39,9 +39,11 @@ $(document).ready(function () {
 
         for (var i = 0; i < results.length; i++) {
           var animalDiv = $("<div>");
+          animalDiv.addClass("d-inline-block");
           var p = $("<p>");
           p.text("Rated: " + results[i].rating);
           var animalImage = $("<img>");
+         
           animalImage.attr("src", results[i].images.fixed_height.url);
           animalDiv.append(p);
           animalDiv.append(animalImage);
