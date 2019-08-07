@@ -1,25 +1,25 @@
 $(document).ready(function () {
-
-  function displayButton(arr) {
-    $(".data-animal").off();
-    for (var i = 0; i < arr.length; i++) {
-      var b = $("<button>")
-      $(b).text(arr[i]);
-      $(b).addClass("data-animal");
-      $(b).attr("data-animal", arr[i]);
-      $("#buttonHolder").append(b).append(" ");
-    }
-    buttonListener();
-
-  }
-
+// inital values
   var topics = [];
   topics.push("cats");
   topics.push("dogs");
   topics.push("turtles");
   displayButton(topics);
 
+  // Displays clickable button
+  function displayButton(arr) {
+    $("#buttonHolder").empty();
+    for (var i = 0; i < arr.length; i++) {
+      var b = $("<button>")
+      $(b).text(arr[i]);
+      $(b).addClass("data-animal");
+      $(b).addClass("btn btn-outline-primary");
+      $(b).attr("data-animal", arr[i]);
+      $("#buttonHolder").append(b).append(" ");
+    }
+    buttonListener();
 
+  }
 
   function buttonListener() {
     $(".data-animal").on("click", function () {
@@ -40,12 +40,12 @@ $(document).ready(function () {
         for (var i = 0; i < results.length; i++) {
           var animalDiv = $("<div>");
           var p = $("<p>");
-          p.text = results[i].rating;
+          p.text("Rated: " + results[i].rating);
           var animalImage = $("<img>");
           animalImage.attr("src", results[i].images.fixed_height.url);
           animalDiv.append(p);
           animalDiv.append(animalImage);
-          $("#gifs-appear-here").prepend(animalDiv);
+          $("#gifs-appear-here").prepend(animalDiv).prepend(" ");
 
         }
 
@@ -53,23 +53,11 @@ $(document).ready(function () {
     });
   }
 
-
-
-
-
-
   $(".newButton").on("click", function () {
     if ($("#animalname").val()) {
-      var b = $("<button>")
-      $(b).text($("#animalname").val());
-      $(b).addClass("data-animal");
-      $(b).attr("data-animal", $("#animalname").val());
-      $("#buttonHolder").append(b).append(" ");
-      $(".data-animal").off();
-      buttonListener();
+      topics.push($("#animalname").val());
+      displayButton(topics);
     }
-
-
 
   });
 })
